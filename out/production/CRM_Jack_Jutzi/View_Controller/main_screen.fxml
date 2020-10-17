@@ -89,7 +89,7 @@
                      <HBox.margin>
                         <Insets left="9.0" top="12.0" />
                      </HBox.margin></RadioButton>
-                        <RadioButton fx:id="weekView" onAction="#selectWeekView"  text="Week View" toggleGroup="$toggleDateRange">
+                        <RadioButton fx:id="weekView" onAction="#selectWeekView" text="Week View" toggleGroup="$toggleDateRange">
                      <HBox.margin>
                         <Insets left="10.0" top="12.0" />
                      </HBox.margin></RadioButton>
@@ -110,6 +110,11 @@
                         </VBox.margin>
                     </TableView>
                     <HBox>
+                  <Button onAction="#runReports" mnemonicParsing="false" prefWidth="80.0" style="-fx-border-color: black;" text="Reports">
+                     <HBox.margin>
+                        <Insets left="10.0" top="1.0" />
+                     </HBox.margin>
+                  </Button>
                         <Button onAction="#addModifyAppt" prefWidth="80" style="-fx-border-color: black;" text="Add">
                             <HBox.margin>
                                 <Insets bottom="10.0" left="135.0" />

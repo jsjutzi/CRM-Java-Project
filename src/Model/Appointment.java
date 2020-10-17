@@ -30,6 +30,15 @@ public class Appointment {
     private LocalDate localDate;
     private LocalTime localStart;
     private LocalTime localEnd;
+    private int numOfAppointments;
+
+    public int getNumOfAppointments() {
+        return numOfAppointments;
+    }
+
+    public void setNumOfAppointments(int numOfAppointments) {
+        this.numOfAppointments = numOfAppointments;
+    }
 
     public LocalDate getLocalDate() {
         return localDate;
@@ -195,9 +204,10 @@ public class Appointment {
         this.date = date;
     }
 
-    public Appointment(int appointmentId, int customerId, int userId, String title, String description, String location, String contact, String type, String url, String date, String start, String end, Timestamp createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy, LocalDate localDate, LocalTime localStart, LocalTime localEnd) {
+    public Appointment(int appointmentId, int customerId, String customerName, int userId, String title, String description, String location, String contact, String type, String url, String date, String start, String end, Timestamp createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy, LocalDate localDate, LocalTime localStart, LocalTime localEnd) {
         this.appointmentId = appointmentId;
         this.customerId = customerId;
+        this.customerName = customerName;
         this.userId = userId;
         this.title = title;
         this.description = description;

@@ -171,21 +171,18 @@ public class MainScreenController {
             currentAppointment.setStart(apptStartTime);
             currentAppointment.setEnd(apptEndTime);
 
-            //Filter appointments by month
-            if (isMonthView) {
-                LocalDate today = LocalDate.now();
-                LocalDate todayPlusMonth = today.plusMonths(1);
+            LocalDate today = LocalDate.now();
+            LocalDate todayPlusMonth = today.plusMonths(1);
+            LocalDate todayPlusWeek = today.plusWeeks(1);
+            LocalDate currentApptDate = localDate;
 
-                LocalDate currentApptDate = localDate;
+            //Filter appointments
+            if (isMonthView) {
                 if (currentApptDate.isAfter(today.minusDays(1)) && currentApptDate.isBefore(todayPlusMonth)) {
                     allAppointments.add(currentAppointment);
                 }
 
             } else if (isWeekView) {
-                LocalDate today = LocalDate.now();
-                LocalDate todayPlusWeek = today.plusWeeks(1);
-
-                LocalDate currentApptDate = localDate;
                 if (currentApptDate.isAfter(today.minusDays(1)) && currentApptDate.isBefore(todayPlusWeek)) {
                     allAppointments.add(currentAppointment);
                 }
@@ -303,6 +300,18 @@ public class MainScreenController {
         alert.showAndWait();
 
         initialize();
+    }
+
+    public void runReports(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("reports.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void exitProgram() {

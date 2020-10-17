@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.ReportsController">
+    <VBox>
+        <Label prefHeight="15.0" prefWidth="187.0" style="-fx-text-fill: #2e257d;" text="Appointment By Customer Report:">
+         <VBox.margin>
+            <Insets left="16.0" top="20.0" />
+         </VBox.margin></Label>
+         <Label style="-fx-text-fill: #2e257d;" text="Schedule By Consultant:">
+         <VBox.margin>
+            <Insets left="480.0" top="-16.0" />
+         </VBox.margin>
+      </Label>
+        <HBox>
+            <TableView fx:id="appointmentsByCustomerTableView" layoutX="14.0" layoutY="58.0" prefHeight="200.0" prefWidth="438.0">
+                <columns>
+                    <TableColumn fx:id="customerIdCol" prefWidth="80.0" text="Customer Id">
+                    </TableColumn>
+                    <TableColumn fx:id="customerNameCol" prefWidth="200.0" text="Customer Name">
+                    </TableColumn>
+                    <TableColumn fx:id="numOfApptsCol" prefWidth="150.0" text="Total Customer Appts">
+                    </TableColumn>
+                </columns>
+             <VBox.margin>
+                <Insets left="16.0" />
+             </VBox.margin>
+            <HBox.margin>
+               <Insets left="16.0" />
+            </HBox.margin>
+            </TableView>
+            <TableView fx:id="scheduleByConsultantTableView" prefHeight="200.0" prefWidth="438.0">
+                <columns>
+                    <TableColumn fx:id="contactCol" prefWidth="120.0" text="Consultant">
+                    </TableColumn>
+                    <TableColumn fx:id="dateCol" prefWidth="120.0" text="Date">
+                    </TableColumn>
+                    <TableColumn fx:id="startCol" prefWidth="105.0" text="Start">
+                    </TableColumn>
+                    <TableColumn fx:id="endCol" prefWidth="105.0" text="End">
+                    </TableColumn>
+                </columns>
+                <VBox.margin>
+                    <Insets left="16.0" />
+                </VBox.margin>
+            <HBox.margin>
+               <Insets left="25.0" />
+            </HBox.margin>
+            </TableView>
+        </HBox>
+        <Label layoutX="14.0" layoutY="34.0" style="-fx-text-fill: #2e257d;" text="Appointment Types by Month:">
+         <padding>
+            <Insets top="45.0" />
+         </padding>
+         <VBox.margin>
+            <Insets left="16.0" />
+         </VBox.margin></Label>
+        <TableView fx:id="appointmentsByMonthTableView" prefHeight="200.0" prefWidth="438.0">
+            <columns>
+                <TableColumn fx:id="monthNameCol" prefWidth="250.0" text="Month">
+                </TableColumn>
+                <TableColumn fx:id="totalApptsCol" prefWidth="200.0" text="Total types of Appointments">
+                </TableColumn>
+            </columns>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets left="16.0" />
+         </VBox.margin>
+        </TableView>
+
+        <Button onAction="#onCancel" prefHeight="27.0" prefWidth="100.0" style="-fx-border-color: black;" text="Back">
+         <VBox.margin>
+            <Insets left="17.0" top="10.0" />
+         </VBox.margin></Button>
+    </VBox>
+</AnchorPane>

@@ -26,6 +26,7 @@ public class AddModifyApptController {
     private ObservableList<String> allConsultants = FXCollections.observableArrayList();
     private boolean isModifyScreen = false;
     private int selectedAppointmentId;
+    private String error;
 
     public ComboBox<Customer> customerComboBox;
     public ComboBox<String> typeComboBox;
@@ -161,14 +162,32 @@ public class AddModifyApptController {
         String currentType = typeComboBox.getSelectionModel().getSelectedItem();
         String currentTitle = title.getText();
 
-        // Verify no empty fields
-        if (currentDate == null || currentCustomer == null || currentConsultant == null || currentType == null || currentTitle == null) {
+        // Verify no invalid fields
+
+        if (currentDate == null) {
+            error = "You must select a date for the appointment";
+        } else if (currentCustomer == null) {
+            error = "You must select a customer for the appointment";
+        } else if (currentConsultant == null) {
+            error = "You must select a consultant for the appointment";
+        } else if (currentType == null) {
+            error = "You must select an appointment type";
+        } else if (currentTitle == null) {
+            error = "You must set a title for the appointment";
+        } else if (currentStartTime.equals(currentEndTime)) {
+            error = "The appointment start and end times cannot be the same";
+        } else if (currentEndTime.isBefore(currentStartTime)) {
+            error = "The appointment end time cannot be before the start time";
+        }
+
+        if (error.length() > 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Records Error");
-            alert.setContentText("All fields must be filled out to save record!");
+            alert.setContentText(error);
             alert.showAndWait();
 
+            error = "";
             return;
         }
         // Validate appt time here
