@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.MainScreenController">
+    <BorderPane>
+        <top>
+            <Label style="-fx-text-fill: #2e257d;" text="Customer Records System">
+                <BorderPane.margin>
+                    <Insets left="25.0" top="16.0" />
+                </BorderPane.margin>
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font></Label>
+        </top>
+        <center>
+            <HBox minHeight="300" minWidth="920" spacing="30.0">
+                <VBox prefHeight="305.0" prefWidth="484.0" style="-fx-border-color: #636263;">
+                    <HBox minHeight="52.0" minWidth="460">
+                        <HBox.margin>
+                            <Insets left="10.0" />
+                        </HBox.margin>
+                        <Label text="Customers">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="10.0" top="10.0" />
+                            </HBox.margin>
+                        </Label>
+                    </HBox>
+                    <TableView fx:id="customerTableView" prefHeight="200.0" prefWidth="300.0">
+                        <columns>
+                            <TableColumn fx:id="customerIdCol" prefWidth="109.0" text="Cust ID">
+                            </TableColumn>
+                            <TableColumn fx:id="customerNameCol" prefWidth="109.0" text="Customer Name">
+                            </TableColumn>
+                            <TableColumn fx:id="customerAddressCol" prefWidth="115.0" text="Customer Address">
+                            </TableColumn>
+                            <TableColumn fx:id="customerPhoneCol" prefWidth="136.0" text="Customer Phone">
+                            </TableColumn>
+                        </columns>
+                        <VBox.margin>
+                            <Insets left="6.0" right="6.0" />
+                        </VBox.margin>
+                    </TableView>
+                    <HBox>
+                        <Button onAction="#addModifyCustomer" prefWidth="80" style="-fx-border-color: black;" text="Add">
+                            <HBox.margin>
+                                <Insets bottom="10.0" left="135.0" />
+                            </HBox.margin></Button>
+                        <Button onAction="#addModifyCustomer" prefWidth="80" style="-fx-border-color: black;" text="Modify">
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin></Button>
+                        <Button onAction="#deleteCustomer" prefWidth="80" style="-fx-border-color: black;" text="Delete">
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin></Button>
+                        <VBox.margin>
+                            <Insets top="10.0" />
+                        </VBox.margin>
+                    </HBox>
+                </VBox>
+                <VBox prefHeight="305.0" prefWidth="540.0" style="-fx-border-color: #636263;">
+                    <HBox minHeight="54.0" minWidth="460">
+                        <HBox.margin>
+                            <Insets left="10.0" />
+                        </HBox.margin>
+                        <Label text="Appointments">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="10.0" top="10.0" />
+                            </HBox.margin>
+                        </Label>
+                        <RadioButton fx:id="allView" onAction="#selectAllView" selected="true" text="All">
+                     <HBox.margin>
+                        <Insets left="89.0" top="12.0" />
+                     </HBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="toggleDateRange" />
+                     </toggleGroup></RadioButton>
+                        <RadioButton fx:id="monthView" onAction="#selectMonthView" text="Month View" toggleGroup="$toggleDateRange">
+                     <HBox.margin>
+                        <Insets left="9.0" top="12.0" />
+                     </HBox.margin></RadioButton>
+                        <RadioButton fx:id="weekView" onAction="#selectWeekView"  text="Week View" toggleGroup="$toggleDateRange">
+                     <HBox.margin>
+                        <Insets left="10.0" top="12.0" />
+                     </HBox.margin></RadioButton>
+                    </HBox>
+                    <TableView fx:id="appointmentsTableView" prefHeight="200.0" prefWidth="300.0">
+                        <columns>
+                            <TableColumn fx:id="customerNameApptCol" prefWidth="200.0" text="Customer">
+                            </TableColumn>
+                            <TableColumn fx:id="dateCol" prefWidth="120.0" text="Date">
+                            </TableColumn>
+                            <TableColumn fx:id="startCol" prefWidth="105.0" text="Start Time">
+                            </TableColumn>
+                            <TableColumn fx:id="endCol" prefWidth="105.0" text="End Time">
+                            </TableColumn>
+                        </columns>
+                        <VBox.margin>
+                            <Insets left="6.0" right="6.0" />
+                        </VBox.margin>
+                    </TableView>
+                    <HBox>
+                        <Button onAction="#addModifyAppt" prefWidth="80" style="-fx-border-color: black;" text="Add">
+                            <HBox.margin>
+                                <Insets bottom="10.0" left="135.0" />
+                            </HBox.margin></Button>
+                        <Button onAction="#addModifyAppt" prefWidth="80" style="-fx-border-color: black;" text="Modify">
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin></Button>
+                        <Button onAction="#deleteAppt" prefWidth="80" style="-fx-border-color: black;" text="Delete">
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin></Button>
+                        <VBox.margin>
+                            <Insets top="10.0" />
+                        </VBox.margin>
+                    </HBox>
+                </VBox>
+                <BorderPane.margin>
+                    <Insets left="25.0" right="25.0" top="25.0" />
+                </BorderPane.margin>
+            </HBox>
+        </center>
+        <bottom>
+            <Button onAction="#exitProgram" prefWidth="80" style="-fx-border-color: black;" text="Logout" BorderPane.alignment="BOTTOM_CENTER">
+                <BorderPane.margin>
+                    <Insets bottom="4.0" left="708.0" top="10.0" />
+                </BorderPane.margin></Button>
+        </bottom>
+    </BorderPane>
+</AnchorPane>

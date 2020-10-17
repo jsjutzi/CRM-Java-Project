@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="474.0" prefWidth="384.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.AddModifyCustomerController">
+    <children>
+        <HBox layoutX="17.0" layoutY="14.0" prefHeight="48.0" prefWidth="367.0">
+            <children>
+                <Label fx:id="customerTitle" text="Add Customer" textFill="#0900b5">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                    </HBox.margin>
+                </Label>
+            </children>
+        </HBox>
+        <HBox layoutX="140.0" layoutY="412.0" prefHeight="35.0" prefWidth="211.0">
+         <children>
+                <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSave" prefWidth="60.0" text="Save" />
+                <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onCancel" prefWidth="60.0" text="Cancel">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </Button>
+         </children></HBox>
+        <VBox layoutX="29.0" layoutY="61.0" prefHeight="283.0" prefWidth="104.0">
+            <children>
+                <Label text="ID">
+                    <VBox.margin>
+                        <Insets top="4.0" />
+                    </VBox.margin>
+                </Label>
+                <Label text="Name">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Label>
+                <Label text="Address">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Label>
+                <Label text="Address 2">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Label>
+                <Label text="City">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Label>
+                <Label text="Zip Code">
+                    <VBox.margin>
+                        <Insets top="22.0" />
+                    </VBox.margin>
+                </Label>
+              <Label text="Country">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Phone">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </Label>
+            </children>
+        </VBox>
+        <TextField fx:id="customerIdTextField" disable="true" layoutX="140.0" layoutY="63.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="128.0" promptText="Auto Gen - Disabled" />
+        <TextField fx:id="customerNameTextField" layoutX="140.0" layoutY="100.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" promptText="Customer Name" />
+        <TextField fx:id="customerAddressTextField" layoutX="140.0" layoutY="138.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" promptText="Address" />
+        <TextField fx:id="customerAddress2TextField" layoutX="140.0" layoutY="173.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" promptText="Address 2" />
+        <TextField fx:id="customerCityTextField" layoutX="140.0" layoutY="211.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" promptText="City" />
+        <TextField fx:id="customerZipCodeTextField" layoutX="140.0" layoutY="247.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" promptText="Postal Code" />
+        <TextField fx:id="customerCountryTextField" layoutX="140.0" layoutY="280.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" promptText="Country" />
+        <TextField fx:id="customerPhoneTextField" layoutX="140.0" layoutY="316.0" prefHeight="27.0" prefWidth="149.0" promptText="Phone" />
+      <fx:define>
+          <ToggleGroup fx:id="toggleCustomerActive"/>
+      </fx:define>
+      <RadioButton fx:id="activeUser" layoutX="145.0" layoutY="359.0" mnemonicParsing="false" text="Active" toggleGroup="$toggleCustomerActive" />
+      <RadioButton fx:id="inactiveUser" layoutX="222.0" layoutY="360.0" mnemonicParsing="false" text="Inactive" toggleGroup="$toggleCustomerActive"/>
+      <Label layoutX="29.0" layoutY="360.0" text="Active" />
+    </children>
+</AnchorPane>
