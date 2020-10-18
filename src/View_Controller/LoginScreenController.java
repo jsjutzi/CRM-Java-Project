@@ -14,11 +14,12 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.DBQuery;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
@@ -86,11 +87,20 @@ public class LoginScreenController {
                 int userId = rs.getInt("userId");
 
                 User user = new User(userId, username.getText(), password.getText());
-                User.setLocalDateTime(LocalDateTime.now());
+
+                LocalDateTime now = LocalDateTime.now();
+                User.setLocalDateTime(now);
+                Timestamp logTime = Timestamp.valueOf(now);
 
                 // Record login in text file here:
+                String filename = "src/log.txt", item;
 
-                // -------------------------------
+                FileWriter fwriter = new FileWriter(filename, true);
+                PrintWriter outputFile = new PrintWriter(fwriter);
+
+                outputFile.println(username.getText() + ": " + logTime.toString() + "\n");
+                outputFile.close();
+                
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("main_screen.fxml"));
                 Parent root = loader.load();
