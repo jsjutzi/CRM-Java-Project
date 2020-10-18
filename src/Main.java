@@ -17,7 +17,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View_Controller/main_screen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View_Controller/login_screen.fxml"));
         Scene scene = new Scene(root);
         // Hard code testing to skip login during dev work
         User user = new User(1, "test", "test");

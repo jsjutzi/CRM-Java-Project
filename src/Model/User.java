@@ -1,9 +1,12 @@
 package Model;
 
+import java.time.LocalDateTime;
+
 public class User {
     private static int userId;
     private static String username;
     private static String password;
+    private static LocalDateTime localDateTime;
 
     public User() {
         userId = 0;
@@ -40,5 +43,13 @@ public class User {
 
     public static void setPassword(String password) {
         User.password = password;
+    }
+
+    public static LocalDateTime getLocalDateTime() {
+        return User.localDateTime;
+    }
+
+    public static void setLocalDateTime(LocalDateTime localDateTime) {
+        User.localDateTime = localDateTime;
     }
 }

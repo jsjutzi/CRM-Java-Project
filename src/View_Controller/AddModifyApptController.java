@@ -26,7 +26,7 @@ public class AddModifyApptController {
     private ObservableList<String> allConsultants = FXCollections.observableArrayList();
     private boolean isModifyScreen = false;
     private int selectedAppointmentId;
-    private String error;
+    private String error = "";
 
     public ComboBox<Customer> customerComboBox;
     public ComboBox<String> typeComboBox;
@@ -86,7 +86,7 @@ public class AddModifyApptController {
         dateComboBox.setVisibleRowCount(8);
 
         LocalTime start = LocalTime.of(6, 0);
-        LocalTime end = LocalTime.NOON;
+        LocalTime end = LocalTime.of(17, 0);
         LocalDate date = LocalDate.now();
         LocalDate furthestAllowableDate = date.plusMonths(3);
 
@@ -172,7 +172,7 @@ public class AddModifyApptController {
             error = "You must select a consultant for the appointment";
         } else if (currentType == null) {
             error = "You must select an appointment type";
-        } else if (currentTitle == null) {
+        } else if (currentTitle == null || currentTitle.length() < 1) {
             error = "You must set a title for the appointment";
         } else if (currentStartTime.equals(currentEndTime)) {
             error = "The appointment start and end times cannot be the same";
@@ -206,6 +206,18 @@ public class AddModifyApptController {
         Timestamp nowTimestamp = new Timestamp(System.currentTimeMillis());
         Instant instant = nowTimestamp.toInstant();
         Timestamp timestampForDatabase = Timestamp.from(instant);
+
+        // Check for schedule conflict
+        boolean isConflict = checkScheduleConflict(databaseStartTime, databaseEndTime);
+        if (isConflict) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Records Update");
+            alert.setContentText("Appointment could not be saved due to schedule conflict.  Please try a different day or time.");
+            alert.showAndWait();
+
+            return;
+        }
 
 
         Connection conn = DBConnection.startConnection();
@@ -266,5 +278,35 @@ public class AddModifyApptController {
 
         onCancel(event);
 
+    }
+
+    private boolean checkScheduleConflict(Timestamp start, Timestamp end) throws SQLException {
+        String consultant = consultantComboBox.getSelectionModel().getSelectedItem();
+
+        String getConflictStatement = "SELECT * FROM appointment WHERE ? BETWEEN start AND end OR ? BETWEEN start and end OR ? < start AND ? > end OR ? = start OR ? = end AND contact = ?;";
+
+        Connection conn = DBConnection.startConnection();
+        DBQuery.setPreparedStatement(conn, getConflictStatement);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+
+
+        String startString = start.toString();
+        String endString = end.toString();
+
+        ps.setString(1, startString);
+        ps.setString(2, endString);
+        ps.setString(3, startString);
+        ps.setString(4, endString);
+        ps.setString(5, startString);
+        ps.setString(6, endString);
+        ps.setString(7, consultant);
+
+        ps.execute();
+        ResultSet results = ps.executeQuery();
+        if (results.next()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

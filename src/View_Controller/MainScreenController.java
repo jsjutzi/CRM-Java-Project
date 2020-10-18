@@ -2,6 +2,7 @@ package View_Controller;
 
 import Model.Appointment;
 import Model.Customer;
+import Model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -197,6 +198,27 @@ public class MainScreenController {
         startCol.setCellValueFactory(new PropertyValueFactory<>("start"));
         endCol.setCellValueFactory(new PropertyValueFactory<>("end"));
 
+        // TODO: Remove, needed for testing.  Put code in login statement
+
+        // Check for 15 minute reminder
+        FilteredList<Appointment> filteredData = new FilteredList<>(allAppointments);
+        filteredData.setPredicate(appt -> {
+            LocalDate userDate = User.getLocalDateTime().toLocalDate();
+            LocalTime userTime = User.getLocalDateTime().toLocalTime();
+            LocalTime apptStart = appt.getLocalStart();
+
+            return  appt.getLocalDate().equals(userDate) &&
+                    appt.getLocalStart().isAfter(userTime) &&
+                    appt.getLocalStart().isBefore(userTime.plusMinutes(15));
+        });
+
+        if (filteredData.size() > 0) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Urgent");
+            alert.setHeaderText("Upcoming Appointment");
+            alert.setContentText("There is an appointment scheduled in the next 15 minutes!");
+            alert.showAndWait();
+        }
 
     }
    // TODO: Condense to one function - pull id off ActionEvent

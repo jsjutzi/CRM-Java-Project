@@ -19,6 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.Locale;
 
 public class LoginScreenController {
@@ -83,12 +84,13 @@ public class LoginScreenController {
 
             if (rs.next()) {
                 int userId = rs.getInt("userId");
-                System.out.println(userId + " is user id");
+
                 User user = new User(userId, username.getText(), password.getText());
+                User.setLocalDateTime(LocalDateTime.now());
 
-                System.out.println(user + "is the user");
+                // Record login in text file here:
 
-
+                // -------------------------------
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("main_screen.fxml"));
                 Parent root = loader.load();
