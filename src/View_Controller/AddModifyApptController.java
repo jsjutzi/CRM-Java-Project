@@ -85,8 +85,21 @@ public class AddModifyApptController {
         // Set start/end time and date functions
         dateComboBox.setVisibleRowCount(8);
 
+        // Set business hours to be from 6am to 5pm in user's local time.
+
+//        ZonedDateTime utc = ZonedDateTime.now(ZoneOffset.UTC);
+//        LocalDateTime localDateTime = utc.toLocalDateTime();
+//        System.out.println("Local date time of UTC: " + localDateTime);
+//
+//        int startHour = localDateTime.getHour();
+//        int endHour = localDateTime.plusHours(9).getHour();
+
         LocalTime start = LocalTime.of(6, 0);
         LocalTime end = LocalTime.of(17, 0);
+
+
+
+
         LocalDate date = LocalDate.now();
         LocalDate furthestAllowableDate = date.plusMonths(3);
 

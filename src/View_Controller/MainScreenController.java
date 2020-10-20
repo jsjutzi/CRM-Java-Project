@@ -26,7 +26,6 @@ import java.time.format.DateTimeFormatter;
 public class MainScreenController {
     private ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
-    private boolean isAllView;
     private boolean isMonthView;
     private boolean isWeekView;
 
@@ -191,8 +190,15 @@ public class MainScreenController {
                 allAppointments.add(currentAppointment);
             }
         }
+        // Eliminate any appointments for dates before today
+        FilteredList<Appointment> filteredAppts = new FilteredList<>(allAppointments);
+        filteredAppts.setPredicate(appt -> {
+            LocalDate now = LocalDate.now();
+            return appt.getLocalDate().isEqual(now) || appt.getLocalDate().isAfter(now);
+        });
 
-        appointmentsTableView.setItems(allAppointments);
+
+        appointmentsTableView.setItems(filteredAppts);
         customerNameApptCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
         startCol.setCellValueFactory(new PropertyValueFactory<>("start"));
@@ -205,7 +211,6 @@ public class MainScreenController {
         filteredData.setPredicate(appt -> {
             LocalDate userDate = User.getLocalDateTime().toLocalDate();
             LocalTime userTime = User.getLocalDateTime().toLocalTime();
-            LocalTime apptStart = appt.getLocalStart();
 
             return  appt.getLocalDate().equals(userDate) &&
                     appt.getLocalStart().isAfter(userTime) &&
@@ -223,7 +228,6 @@ public class MainScreenController {
     }
    // TODO: Condense to one function - pull id off ActionEvent
     public void selectAllView() throws SQLException {
-        isAllView = true;
         isMonthView = false;
         isWeekView = false;
 
@@ -231,14 +235,12 @@ public class MainScreenController {
     }
 
     public void selectMonthView() throws SQLException {
-        isAllView = false;
         isMonthView = true;
         isWeekView = false;
 
         initialize();
     }
     public void selectWeekView() throws SQLException {
-        isAllView = false;
         isMonthView = false;
         isWeekView = true;
 

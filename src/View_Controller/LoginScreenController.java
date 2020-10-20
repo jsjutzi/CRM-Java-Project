@@ -100,7 +100,7 @@ public class LoginScreenController {
 
                 outputFile.println(username.getText() + ": " + logTime.toString() + "\n");
                 outputFile.close();
-                
+
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("main_screen.fxml"));
                 Parent root = loader.load();

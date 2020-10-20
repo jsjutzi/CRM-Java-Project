@@ -128,7 +128,13 @@ public class AddModifyCustomerController {
                 && city != null
                 && postalCode != null
                 && country != null
-                && phone != null;
+                && phone != null
+                && customerName.length() != 0
+                && address.length() != 0
+                && city.length() != 0
+                && postalCode.length() != 0
+                && country.length() != 0
+                && phone.length() != 0;
 
         return isValid;
     }
